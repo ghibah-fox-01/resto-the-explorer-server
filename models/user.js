@@ -12,28 +12,29 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.belongsToMany(models.Restoran, { through: 'fav_lists' })
     }
   };
   User.init({
     name: DataTypes.STRING,
     email: {
-      type:DataTypes.STRING,
-      validate:{
-          isEmail: {
-            args:true,
-            // args: /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
-            msg: "Email Invalid"
-          }
+      type: DataTypes.STRING,
+      validate: {
+        isEmail: {
+          args: true,
+          // args: /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i,
+          msg: "Email Invalid"
+        }
       }
     },
     password: DataTypes.STRING
   }, {
-    hooks:{
-      beforeCreate: (user,options) =>{
+    hooks: {
+      beforeCreate: (user, options) => {
         try {
           const salt = bcrypt.genSaltSync(10)
           console.log(salt)
-          user.password = bcrypt.hashSync(user.password,salt)
+          user.password = bcrypt.hashSync(user.password, salt)
         } catch (err) {
           console.log(err)
         }
