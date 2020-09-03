@@ -16,9 +16,21 @@ class UserController{
       })
     })
     .catch((err)=>{
-      res.status(500).json({
-        message:"Internal server error"
-      })
+      if(err.name === "SequelizeUniqueConstraintError"){
+        res.status(400).json({
+          message:err.errors[0].message
+        })
+      }
+      else if(err.errors[0].message === "Email Invalid"){
+        res.status(400).json({
+          message:err.errors[0].message
+        })
+      }
+      else{
+        res.status(500).json({
+          message:"Internal server error"
+        })
+      }
     })
   }
   static postLogin(req,res){
