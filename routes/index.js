@@ -6,7 +6,6 @@ const restoRoutes = require('./resto-routes')
 const userRoutes = require('./user-routes.js')
 const favRoutes = require('./fav-routes.js')
 
-router.use('/resto',todosRoutes)
 router.use('/user',userRoutes)
 router.use('/fav',favRoutes)
 
