@@ -1,4 +1,7 @@
 const { User,Restoran,Fav_List } = require('../models')
+const bcrypt = require(`bcryptjs`)
+const jwt = require(`jsonwebtoken`)
+
 class UserController{
   static postRegister(req,res){
     User.create({
@@ -19,6 +22,40 @@ class UserController{
     })
   }
   static postLogin(req,res){
+    User.findOne({
+      where:{
+        email:req.body.email
+      }
+    })
+    .then((data)=>{
+      if(data){
+        if(bcrypt.compareSync(req.body.password,data.password)){
+          const payload = {
+            name:req.body.name,
+            email:req.body.email
+          }
+          let token = jwt.sign(payload,process.env.SECRET_KEY)
+          res.status(200).json({
+            token
+          })
+        }
+        else{
+          res.status(400).json({
+            message:"Invalid email/password"
+          })
+        }
+      }
+      else{
+        res.status(400).json({
+          message:"Invalid email/password"
+        })
+      }
+    })
+    .catch(()=>{
+      res.status(400).json({
+        message:"Invalid email/password"
+      })
+    })
   }
 }
 module.exports = UserController
