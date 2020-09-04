@@ -6,7 +6,7 @@ const { OAuth2Client } = require('google-auth-library');
 const gClient = new OAuth2Client(process.env.google_oauth_clientId);
 
 class UserController {
-  
+
   static postRegister(req, res) {
     User.create({
       name: req.body.name,
@@ -113,6 +113,6 @@ class UserController {
       })
 
   }
-
 }
+
 module.exports = UserController
