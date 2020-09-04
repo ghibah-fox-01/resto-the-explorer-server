@@ -49,10 +49,8 @@ class RestoranController {
 
   static addToFavourites(req, res, next) {
     let decoded = jwt.verify(req.headers.token, process.env.SECRET_KEY)
-    let userId;           //userId dibutuhkan di pivot table untuk favourite (Fave_Lists table)
-    let restoranName;
-
-    User.findOne({ where: { email: decoded.email } })   //search userId untuk mendapatkan Id user yg skrg
+    let userId;
+    User.findOne({ where: { email: decoded.email } })
       .then((dataUser) => {                             //karena token kita ngga simpen userId
         userId = dataUser.id;
         return Restoran.findOne({ where: { name: req.body.search } }) //mencari restoran berdasarkan nama
@@ -60,7 +58,7 @@ class RestoranController {
       .then((restoranData) => {
         if (restoranData === null) {
           return Restoran.create({     //create restoran di table restoran kalau tidak ada di database
-            name: req.body.name,
+            name: req.body.search,
             address: req.body.address,
             rate: req.body.rating
           })
@@ -78,10 +76,8 @@ class RestoranController {
         res.status(201).json({ message: `Restoran berhasil ditambahkan ke favourite list` })
       })
       .catch((err) => {
-        res.status(500).json({ message: 'Internal Server Error' })
+        res.status(500).json({ message: err })
       })
-
-
   }
 
 }
