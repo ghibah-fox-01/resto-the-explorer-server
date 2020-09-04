@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 function FindZomato( query , callback ){
     //zomato api
-    fetch(`https://developers.zomato.com/api/v2.1/search?q=${query}&count=5` , {
+    fetch(`https://developers.zomato.com/api/v2.1/search?q=${query}` , {
         method :'get',
         headers : {
             'Content-Type' : 'application/json',
