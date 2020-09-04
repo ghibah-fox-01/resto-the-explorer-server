@@ -6,6 +6,7 @@ const { OAuth2Client } = require('google-auth-library');
 const gClient = new OAuth2Client(process.env.google_oauth_clientId);
 
 class UserController {
+  
   static postRegister(req, res) {
     User.create({
       name: req.body.name,
@@ -72,6 +73,7 @@ class UserController {
   }
 
   static googleLoginHandler(req, res, next) {
+    console.log('abc')
     let payload;
     gClient.verifyIdToken({
       idToken: req.body.id_token,

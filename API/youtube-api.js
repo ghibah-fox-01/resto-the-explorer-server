@@ -12,11 +12,11 @@ function FindYoutube(data , callback){
     .then(response=>{
 
         let reference = {
-            video : []
+            video : ''
         }
 
         response.data.items.forEach(elem =>{
-                reference.video.push(`https://www.youtube.com/watch?${elem.id.videoId}`)
+                reference.video = `https://www.youtube.com/watch?${elem.id.videoId}`
         })
 
         callback(null , reference)
