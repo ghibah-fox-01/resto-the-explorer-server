@@ -6,7 +6,7 @@ class RestoranController{
 
   static restoList(req,res){
 
-    let title = req.query.search
+    let title = req.body.search
 
       FindZomato(title , (err , data)=>{
         if(err){
@@ -19,7 +19,7 @@ class RestoranController{
           
               FindYoutube( elem.restaurant.name , (err , data)=>{
                 if(err){                  
-                  
+                  console.log(err)
                   res.status(500).json({message : 'Internal Server Error'})
                 }else{
 
