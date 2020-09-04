@@ -58,7 +58,7 @@ class RestoranController {
       .then((restoranData) => {
         if (restoranData === null) {
           return Restoran.create({     //create restoran di table restoran kalau tidak ada di database
-            name: req.body.name,
+            name: req.body.search,
             address: req.body.address,
             rate: req.body.rating
           })
