@@ -6,6 +6,7 @@ function FindYoutube(data , callback){
     google.youtube('v3').search.list({
     key: process.env.YOUTUBE_TOKEN,
     part : 'snippet',
+    maxResults: 1,
     q: data,
     })
     .then(response=>{
