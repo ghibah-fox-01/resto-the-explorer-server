@@ -1,7 +1,11 @@
 {
   "development": {
     "username": "postgres",
+<<<<<<< HEAD
     "password": "postgres",
+=======
+    "password": "12341234",
+>>>>>>> f8cf5d9967ce76ca8522a207f1ac848553d1b9b3
     "database": "resto_exploration",
     "host": "localhost",
     "dialect": "postgres"

@@ -4,7 +4,7 @@ require('dotenv').config()
 function FindYoutube(data , callback){
     //youtube api
     google.youtube('v3').search.list({
-    key: process.env.YOUTUBE_TOKEN,
+    key: process.env.YOUTUBE_KEY,
     part : 'snippet',
     maxResults: 1,
     q: data,
@@ -12,11 +12,11 @@ function FindYoutube(data , callback){
     .then(response=>{
 
         let reference = {
-            video : []
+            video : ''
         }
 
         response.data.items.forEach(elem =>{
-                reference.video.push(`https://www.youtube.com/watch?${elem.id.videoId}`)
+                reference.video = `https://www.youtube.com/watch?v=${elem.id.videoId}`
         })
 
         callback(null , reference)
