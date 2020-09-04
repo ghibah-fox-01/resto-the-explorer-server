@@ -6,7 +6,7 @@ function FindZomato( query , callback ){
         method :'get',
         headers : {
             'Content-Type' : 'application/json',
-            'user-key' : 'abe0dcbd6b751f8aaea7809236b7b96c'
+            'user-key' : process.env.ZOMATO_TOKEN
         }
     })
     .then(response =>{
@@ -22,4 +22,4 @@ function FindZomato( query , callback ){
 
 }
 
-module.exports = Fin
+module.exports = FindZomato
